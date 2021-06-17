@@ -1,0 +1,29 @@
+{
+  "name": "unimed-challenge",
+  "version": "0.0.1",
+  "description": "An automated testing project with Unimed's website for Noesis technical challenge.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevGabrielDeSouza/unimed-challenge.git"
+  },
+  "keywords": [
+    "cypress",
+    "automated",
+    "testing",
+    "challenge",
+    "interview",
+    "qa",
+    "web",
+    "javascript"
+  ],
+  "author": "Gabriel de Souza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DevGabrielDeSouza/unimed-challenge/issues"
+  },
+  "homepage": "https://github.com/DevGabrielDeSouza/unimed-challenge#readme"
+}
