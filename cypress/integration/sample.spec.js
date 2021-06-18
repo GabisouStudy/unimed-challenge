@@ -64,11 +64,15 @@ describe('Unimed', () => {
 
 		cy.wait(5000);
 
-		cy.get("a")
-		.filter(".ProviderAddressAsGrid--address-link")
-		.each(($elem) => {
-			cy.wrap($elem).should("not.contains.text", "São Paulo");
-		});
-		// TODO: Check the multiple pages (pages 1,2 and 3)
+
+		for(let i = 0; i < 3; i++){
+			cy.get("a")
+			.filter(".ProviderAddressAsGrid--address-link")
+			.each(($elem) => {
+				cy.wrap($elem).should("not.contains.text", "São Paulo");
+			});
+			if(i == 3 - 1) break;
+			cy.contains("Ver mais resultados").click();
+		}
  	});
 });
