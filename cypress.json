@@ -1,4 +1,6 @@
 {
 	"projectId": "zrjbig",
-	"chromeWebSecurity": false
+	"chromeWebSecurity": false,
+	"testFiles": "**/*.feature",
+	"baseUrl": "https://www.unimed.coop.br"
 }

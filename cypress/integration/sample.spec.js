@@ -6,10 +6,10 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 	return false;
 });
 
-describe('Unimed', () => {
+/*describe('Unimed', () => {
 	beforeEach(() => {
-		cy.visit("https://www.unimed.coop.br");
 		cy.viewport(1920, 1080);
+		cy.visit("https://www.unimed.coop.br");
 	});
 
 	it('Searching cidade and especialidade', () => {
@@ -75,4 +75,4 @@ describe('Unimed', () => {
 			cy.contains("Ver mais resultados").click();
 		}
  	});
-});
+});*/

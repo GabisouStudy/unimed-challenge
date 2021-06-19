@@ -28,6 +28,11 @@
 	},
 	"homepage": "https://github.com/DevGabrielDeSouza/unimed-challenge#readme",
 	"devDependencies": {
-		"cypress": "^7.5.0"
+		"cypress": "^7.5.0",
+		"cypress-cucumber-preprocessor": "^4.1.2"
+	},
+	"dependencies": {},
+	"cypress-cucumber-preprocessor": {
+		"nonGlobalStepDefinitions": true
 	}
 }
