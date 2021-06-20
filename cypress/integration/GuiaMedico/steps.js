@@ -19,8 +19,10 @@ And(/^acessa a página de "([^"]*)"$/, (pageName) => {
 	.filter(":visible")
 	.first()
 	.click();
+
 	cy.intercept("GET", "/guia-medico/v3/filtro/especialidades?tipo=MISTO")
 	.as("requestEspecialidades");
+
 	cy.intercept("GET", "/guia-medico/v3/filtro/estados")
 	.as("requestEstados");
 });
@@ -37,8 +39,13 @@ When(/^eu busco pela especialidade "([^"]*)", estado "([^"]*)" e cidade "([^"]*)
 	cy.contains("Especialidade").click();
 	cy.get(ESPECIALIDADE_DROPDOWN).children().contains(especialidade).click();
 
+	cy.intercept("GET", "/guia-medico/v3/filtro/cidades?estado="+ estado.replaceAll(" ", "+"))
+	.as("requestCidades");
+
 	cy.contains("Estado").click();
 	cy.get(ESTADO_DROPDOWN).children().contains(estado).click();
+
+	cy.wait("@requestCidades");
 
 	cy.contains("Cidade").click();
 	cy.get(CIDADE_DROPDOWN).children().contains(cidade).click();
