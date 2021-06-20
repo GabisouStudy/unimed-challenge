@@ -1,13 +1,11 @@
 /// <reference types="cypress" />
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
-const FIRST_RESULT_SELECTOR = "#gm-v3-root > div > div:nth-child(2) > div.col-lg-9 > div.d-block > div:nth-child(2) > div:nth-child(1) > div > div.ProviderAddressWrapper > div.ProviderAddressColumn.col-lg-7 > a";
 const ESTADO_DROPDOWN_SELECTOR = "#province-input > div.css-8plzl5-menu";
 const CIDADE_DROPDOWN_SELECTOR = "#city-input > div.css-8plzl5-menu";
 const ESPECIALIDADE_DROPDOWN_SELECTOR = "#react-tabs-3 > form > div > div:nth-child(3) > div:nth-child(1) > div > div.css-8plzl5-menu";
 
 Given(/^que o usuário acessa o site da Unimed$/, () => {
-	cy.viewport(1920, 1080);
 	cy.visit("https://www.unimed.coop.br");
 });
 
@@ -46,7 +44,7 @@ When(/^eu busco pela especialidade "([^"]*)", estado "([^"]*)" e cidade "([^"]*)
 
 
 And(/^todos os resultados devem conter "([^"]*)" no campo de especialidade$/,(especialidade) => {
-	cy.get(FIRST_RESULT_SELECTOR);
+	cy.contains("Perfil do Prestador");
 
 	cy.get("div")
 	.filter(".ProviderSpecialties")
@@ -56,7 +54,7 @@ And(/^todos os resultados devem conter "([^"]*)" no campo de especialidade$/,(es
 });
 
 Then(/^todos os resultados devem conter "([^"]*)" no campo de cidade$/,(cidade) => {
-	cy.get(FIRST_RESULT_SELECTOR);
+	cy.contains("Perfil do Prestador");
 
 	cy.get("a")
 	.filter(".ProviderAddressAsGrid--address-link")
@@ -67,7 +65,7 @@ Then(/^todos os resultados devem conter "([^"]*)" no campo de cidade$/,(cidade) 
 
 
 Then(/^nenhum resultado nas "([^"]*)" primeiras páginas devem conter "([^"]*)" no campo de cidade$/, (pageAmount, cidade) => {
-	cy.get(FIRST_RESULT_SELECTOR);
+	cy.contains("Perfil do Prestador");
 
 	for(let i = 0; i < parseInt(pageAmount); i++){
 		cy.get("a")
