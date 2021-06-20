@@ -1,11 +1,15 @@
 /// <reference types="cypress" />
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
-const ESTADO_DROPDOWN_SELECTOR = "#province-input > div.css-8plzl5-menu";
-const CIDADE_DROPDOWN_SELECTOR = "#city-input > div.css-8plzl5-menu";
-const ESPECIALIDADE_DROPDOWN_SELECTOR = "#react-tabs-3 > form > div > div:nth-child(3) > div:nth-child(1) > div > div.css-8plzl5-menu";
+const VIEW_WIDTH = Cypress.env("viewport_width");
+const VIEW_HEIGHT = Cypress.env("viewport_height");
+
+const ESPECIALIDADE_DROPDOWN = Cypress.env("especialidade_dropdown_selector") ;
+const ESTADO_DROPDOWN = Cypress.env("estado_dropdown_selector");
+const CIDADE_DROPDOWN = Cypress.env("cidade_dropdown_selector");
 
 Given(/^que o usuário acessa o site da Unimed$/, () => {
+	cy.viewport(VIEW_WIDTH, VIEW_HEIGHT);
 	cy.visit("https://www.unimed.coop.br");
 });
 
@@ -31,13 +35,13 @@ When(/^eu busco pela especialidade "([^"]*)", estado "([^"]*)" e cidade "([^"]*)
 	cy.wait("@requestEstados");
 
 	cy.contains("Especialidade").click();
-	cy.get(ESPECIALIDADE_DROPDOWN_SELECTOR).children().contains(especialidade).click();
+	cy.get(ESPECIALIDADE_DROPDOWN).children().contains(especialidade).click();
 
 	cy.contains("Estado").click();
-	cy.get(ESTADO_DROPDOWN_SELECTOR).children().contains(estado).click();
+	cy.get(ESTADO_DROPDOWN).children().contains(estado).click();
 
 	cy.contains("Cidade").click();
-	cy.get(CIDADE_DROPDOWN_SELECTOR).children().contains(cidade).click();
+	cy.get(CIDADE_DROPDOWN).children().contains(cidade).click();
 
 	cy.contains("Pesquisar").click();
 });
