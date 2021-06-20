@@ -119,3 +119,6 @@ dist
 
 # Visual Studio Code cache directory
 .vscode/
+
+# Cypress video artifacts folder
+cypress/videos/
