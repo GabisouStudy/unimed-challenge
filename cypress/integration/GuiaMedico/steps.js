@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
+const FIRST_RESULT_SELECTOR = "#gm-v3-root > div > div:nth-child(2) > div.col-lg-9 > div.d-block > div:nth-child(2) > div:nth-child(1) > div > div.ProviderAddressWrapper > div.ProviderAddressColumn.col-lg-7 > a";
 
 Given(/^que o usuário acessa o site da Unimed$/, () => {
 	cy.viewport(1920, 1080);
@@ -13,6 +14,10 @@ And(/^acessa a página de "([^"]*)"$/, (pageName) => {
 	.filter(":visible")
 	.first()
 	.click();
+	cy.intercept("GET", "/guia-medico/v3/filtro/especialidades?tipo=MISTO")
+	.as("requestEspecialidades");
+	cy.intercept("GET", "/guia-medico/v3/filtro/estados")
+	.as("requestEstados");
 });
 
 And(/^ativa a aba "([^"]*)"$/, (tabName) => {
@@ -21,7 +26,8 @@ And(/^ativa a aba "([^"]*)"$/, (tabName) => {
 });
 
 When(/^eu busco pela especialidade "([^"]*)" e cidade "([^"]*)"$/,(especialidade, cidade) => {
-	cy.wait(5000);
+	cy.wait("@requestEspecialidades");
+	cy.wait("@requestEstados");
 
 	cy.get("#province-input > div > div.css-5ahn1r > div.css-tlfecz-indicatorContainer > svg").click();
 	cy.contains(cidade).click();
@@ -31,13 +37,9 @@ When(/^eu busco pela especialidade "([^"]*)" e cidade "([^"]*)"$/,(especialidade
 });
 
 And(/^todos os resultados devem conter "([^"]*)" no campo de especialidade$/,(especialidade) => {
-	cy.wait(5000);
+	cy.get(FIRST_RESULT_SELECTOR);
 
 	cy.get("div")
-	.filter(".ProviderSpecialties")
-	.each(($elem) => {
-		cy.wrap($elem).should("contains.text", especialidade);
-	});cy.get("div")
 	.filter(".ProviderSpecialties")
 	.each(($elem) => {
 		cy.wrap($elem).should("contains.text", especialidade);
@@ -45,7 +47,7 @@ And(/^todos os resultados devem conter "([^"]*)" no campo de especialidade$/,(es
 });
 
 Then(/^todos os resultados devem conter "([^"]*)" no campo de cidade$/,(cidade) => {
-	cy.wait(5000);
+	cy.get(FIRST_RESULT_SELECTOR);
 
 	cy.get("a")
 	.filter(".ProviderAddressAsGrid--address-link")
@@ -56,7 +58,7 @@ Then(/^todos os resultados devem conter "([^"]*)" no campo de cidade$/,(cidade) 
 
 
 Then(/^nenhum resultado nas "([^"]*)" primeiras páginas devem conter "([^"]*)" no campo de cidade$/, (pageAmount, cidade) => {
-	cy.wait(5000);
+	cy.get(FIRST_RESULT_SELECTOR);
 
 	for(let i = 0; i < parseInt(pageAmount); i++){
 		cy.get("a")
