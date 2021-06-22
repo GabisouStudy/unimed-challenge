@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "cypress run",
+		"test-ci": "npx cypress run --record --key 2bf1fe64-d56a-41e8-8929-781d8698b283",
 		"test-chrome": "cypress run --browser chrome",
 		"test-chrome-ci": "npx cypress run --browser chrome --record --key 2bf1fe64-d56a-41e8-8929-781d8698b283",
 		"test-edge": "cypress run --browser edge",
