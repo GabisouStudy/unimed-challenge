@@ -4,8 +4,14 @@
 	"description": "An automated testing project with Unimed's website for Noesis technical challenge.",
 	"main": "index.js",
 	"scripts": {
-		"test": "",
-		"e2e": "cypress open"
+		"test": "cypress run",
+		"test-chrome": "cypress run --browser chrome",
+		"test-chrome-ci": "npx cypress run --browser chrome --record --key 2bf1fe64-d56a-41e8-8929-781d8698b283",
+		"test-edge": "cypress run --browser edge",
+		"test-edge-ci": "npx cypress run --browser edge --record --key 2bf1fe64-d56a-41e8-8929-781d8698b283",
+		"test-firefox": "cypress run --browser firefox",
+		"test-firefox-ci": "npx cypress run --browser firefox --record --key 2bf1fe64-d56a-41e8-8929-781d8698b283",
+		"cypress-ide": "cypress open"
 	},
 	"repository": {
 		"type": "git",
